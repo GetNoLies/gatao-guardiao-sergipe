@@ -1,6 +1,6 @@
 # Gatão: O Guardião das Cidades Sergipanas
 
-**Gatão: O Guardião das Cidades Sergipanas** é um jogo educativo em formato de quiz cultural, desenvolvido como parte de um projeto MVP da faculdade.
+**Gatão: O Guardião das Cidades Sergipanas** é um jogo educativo em formato de quiz cultural, desenvolvido como parte de um projeto da faculdade.
 
 O jogo acompanha Gatão em uma jornada por locais inspirados em cidades e pontos culturais de Sergipe. O jogador responde perguntas, coleta itens culturais, avança pelas fases e tenta concluir a aventura sem perder toda a vida.
 
@@ -11,9 +11,7 @@ O objetivo principal desta implementação é demonstrar:
 - Tratamento de exceções;
 - Persistência de dados;
 - Validação de entradas;
-- Organização básica de um projeto front-end;
-- Simulação visual de regras de jogo.
-
+  
 A parte desenvolvida busca garantir que o jogo não quebre com entradas inválidas e que consiga salvar, carregar e limpar o progresso do jogador por meio de uma camada de persistência.
 
 ## Tecnologias Utilizadas
