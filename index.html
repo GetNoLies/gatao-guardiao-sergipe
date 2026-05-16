@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Gatão - Persistência e Exceções</title>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <main>
+    <h1>Gatão: O Guardião das Cidades Sergipanas</h1>
+    <p class="subtitle">Quiz cultural com persistência, exceções e simulação visual</p>
+
+    <div class="layout">
+      <div class="grid">
+        <section>
+          <h2>Dados do Jogador</h2>
+
+          <label for="playerName">Nome</label>
+          <input id="playerName" placeholder="Ex: Symon" />
+
+          <button class="success" onclick="startGame()">Salvar / Iniciar</button>
+          <button onclick="loadGame()">Carregar</button>
+          <button class="danger" onclick="resetGame()">Resetar</button>
+
+          <div id="message" class="message">Aguardando ação...</div>
+        </section>
+
+        <section>
+          <h2>Status</h2>
+
+          <p><strong>Jogador:</strong> <span id="statusName">---</span></p>
+          <p><strong>Fase:</strong> <span id="statusStage">---</span></p>
+          <p><strong>Local:</strong> <span id="statusPlace">---</span></p>
+          <p><strong>Vida:</strong> <span id="statusLife">---</span></p>
+          <p><strong>Situação:</strong> <span id="statusGame">Aguardando jogador</span></p>
+
+          <h3>Inventário</h3>
+          <div id="inventory"></div>
+        </section>
+
+        <section class="full quiz-card">
+          <h2>Pergunta da Fase</h2>
+
+          <p id="questionText" class="question-text">
+            Inicie o jogo para receber uma pergunta.
+          </p>
+
+          <div id="answers" class="answers">
+            <button class="answer-button" disabled>Aguardando...</button>
+          </div>
+        </section>
+
+        <section class="full">
+          <h2>Histórico</h2>
+          <div id="log"></div>
+        </section>
+      </div>
+
+      <aside class="game-screen">
+        <div id="scene" class="scene stage-1">
+          <div class="cloud cloud-one"></div>
+          <div class="cloud cloud-two"></div>
+
+          <div class="sun"></div>
+          <div id="scenePlace" class="ground-label">Centro e Mercados</div>
+
+          <div id="collectibleScreen" class="collectible-on-screen">?</div>
+
+          <div id="itemReward" class="item-reward">
+            <span id="itemRewardIcon">🎁</span>
+            <strong>Item recebido!</strong>
+            <small id="itemRewardName">---</small>
+          </div>
+
+          <div class="shadow"></div>
+
+          <div id="player" class="player">
+            <div class="tail"></div>
+            <div class="ear left"></div>
+            <div class="ear right"></div>
+            <div class="hat"></div>
+            <div class="head"></div>
+            <div class="eye left"></div>
+            <div class="eye right"></div>
+            <div class="body"></div>
+          </div>
+
+          <div id="floatingText" class="floating-text">Ação</div>
+
+          <div class="overlay-game-over">
+            <div>
+              GAME OVER
+              <small>Resete o jogo para tentar novamente</small>
+            </div>
+          </div>
+
+          <div class="overlay-victory">
+            <div class="victory-content">
+              <div class="celebration-stars">✨ 🎉 ✨</div>
+              <div class="victory-title">VITÓRIA!</div>
+
+              <div class="celebration-cat">
+                <div class="tail"></div>
+                <div class="ear left"></div>
+                <div class="ear right"></div>
+                <div class="hat"></div>
+                <div class="head"></div>
+                <div class="eye left"></div>
+                <div class="eye right"></div>
+                <div class="body"></div>
+              </div>
+
+              <div class="victory-subtitle">
+                Gatão concluiu a aventura e protegeu a história das cidades sergipanas!
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hud">
+          <strong>Vida</strong>
+
+          <div class="life-bar">
+            <div id="lifeFill" class="life-fill"></div>
+          </div>
+
+          <div class="hud-info">
+            <p><strong>Fase:</strong> <span id="hudStage">---</span></p>
+            <p><strong>Ação atual:</strong> <span id="hudAction">Aguardando...</span></p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
