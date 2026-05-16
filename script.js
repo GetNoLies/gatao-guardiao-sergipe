@@ -181,11 +181,20 @@ function getStage(id = progress.currentStage) {
   return stages.find(stage => stage.id === Number(id));
 }
 
+function handleMainAction() {
+  if (progress.started) {
+    saveProgress();
+    return;
+  }
+
+  startGame();
+}
+
 function getFormData() {
   return {
     ...progress,
     playerName: document.querySelector("#playerName").value.trim(),
-    currentStage: FIRST_STAGE,
+    currentStage: progress.started ? progress.currentStage : FIRST_STAGE,
     life: progress.started ? progress.life : 100,
     transitioning: false
   };
@@ -245,6 +254,22 @@ function startGame() {
 
     showMessage("Jogo iniciado.");
     addLog("Jogador salvo. A aventura começou na fase 1.");
+  });
+}
+
+function saveProgress() {
+  runSafely(() => {
+    if (!progress.started) {
+      throw new Error("Inicie o jogo antes de salvar.");
+    }
+
+    persistence.save(progress);
+
+    updateScreen();
+    animateAction("save", "💾 Salvo");
+
+    showMessage("Progresso salvo.");
+    addLog("Progresso salvo sem reiniciar a partida.");
   });
 }
 
@@ -322,7 +347,7 @@ function handleCorrectAnswer() {
   animateAction("collect", `+ ${item.name}`);
   showItemReward(item);
 
-  showMessage(`Resposta correta! Gatão recebeu um item.`);
+  showMessage("Resposta correta! Gatão recebeu um item.");
   addLog(`Resposta correta na fase ${stage.id}. Item recebido: ${item.name}.`);
 
   if (healed > 0) {
@@ -476,6 +501,7 @@ function updateScreen() {
   updateGameScreen(stage);
   updateMessageStyle();
   updateQuizButtons();
+  updateMainActionButton();
 }
 
 function getGameStatus() {
@@ -559,6 +585,20 @@ function updateQuizButtons() {
   });
 }
 
+function updateMainActionButton() {
+  const button = document.querySelector("#mainActionButton");
+  const playerNameInput = document.querySelector("#playerName");
+
+  if (progress.started) {
+    button.textContent = "Salvar";
+    playerNameInput.disabled = true;
+    return;
+  }
+
+  button.textContent = "Iniciar";
+  playerNameInput.disabled = false;
+}
+
 function updateGameScreen(stage) {
   const scene = document.querySelector("#scene");
 
@@ -580,8 +620,7 @@ function updateGameScreen(stage) {
 
   document.querySelector("#lifeFill").style.width = `${progress.life}%`;
 
-  document.querySelector("#collectibleScreen").textContent =
-    progress.started ? "?" : "?";
+  document.querySelector("#collectibleScreen").textContent = "?";
 
   const collectible = stage?.collectible;
 
